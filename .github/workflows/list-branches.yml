@@ -1,0 +1,19 @@
+name: List Remote Branches
+ 
+on:
+  workflow_dispatch:
+ 
+jobs:
+  list-branches:
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+ 
+    - name: List Remote Branches
+      run: |
+        cd $GITHUB_WORKSPACE
+        for branch in $(git branch -r); do
+          echo "${branch#origin/}"
+        done
